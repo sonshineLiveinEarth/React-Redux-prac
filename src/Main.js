@@ -1,23 +1,17 @@
 import React from "react";
-import styled, { keyframes } from "styled-components";
+import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
 import img from "./plus.png";
+import Card from "./Card";
 
 const Main = () => {
   const history = useHistory();
   return (
     <>
+      <Div />
       <Wrap>
-        <Card_box>
-          <Ul>
-            <Li1>Hello</Li1>
-            <Li>[hello]</Li>
-            <Li3>안녕</Li3>
-            <Li>hello, rtan!</Li>
-            <Li>안녕, 르탄!</Li>
-          </Ul>
-        </Card_box>
+        <Card />
       </Wrap>
 
       <PlusBtn
@@ -35,56 +29,14 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+  align-items: stretch;
+  flex-wrap: wrap-reverse;
+  overflow: visible;
 `;
 
-const Card_box = styled.div`
-  background-color: transition;
-  border: 1px solid black;
-  border-radius: 8px;
-  min-width: 300px;
-  max-width: 400px;
-  width: 90%;
-  height: 140px;
-  margin: 20px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: left;
-  padding: 20px;
-
-  &:hover {
-    box-shadow: 5px 5px 20px #e6e6e6;
-  }
-`;
-
-const Ul = styled.li`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: left;
-`;
-
-const Li1 = styled.li`
-  display: flex;
-  font-size: 30px;
-  margin: 2px;
-  font-weight: bold;
-`;
-
-const Li3 = styled.li`
-  display: flex;
-  font-size: 18px;
-  margin: 2px;
-  font-weight: bold;
-`;
-
-const Li = styled.li`
-  display: flex;
-  font-size: 18px;
-  margin: 2px;
+const Div = styled.div`
+  width: 100%;
+  height: 100px;
 `;
 
 const PlusBtn = styled.div`
@@ -103,26 +55,14 @@ const PlusBtn = styled.div`
   }
 `;
 
-const Plus_spin = keyframes`
-0% {
-    transform: rotate(0deg);
-}
-30% {
-    transform: rotate(30deg);
-}
-100% {
-    transform: rotate(90deg);
-}
-`;
-
 const Plus = styled.img`
   width: 28px;
   height: 28px;
+  transition: transform 0.3s ease-in-out;
 
   z-index: 1;
   &:hover {
-    animation: ${Plus_spin} 0.25s linear;
-    animation-iteration-count: 1;
+    transform: rotate(90deg);
   }
 `;
 

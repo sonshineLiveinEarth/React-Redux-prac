@@ -1,15 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { createMemoFB } from "./redux/modules/memo";
+import { useDispatch, useSelector } from "react-redux";
+import { loadMemoFB, updateMemoFB } from "./redux/modules/memo";
 
-import { db } from "./firebase";
-import { collection, addDoc } from "firebase/firestore";
-
-const Write = (props) => {
+const Modifi = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
+  // const words = useParams();
+  const my_lists = useSelector((state) => state.memo.list);
 
   const word = React.useRef(null);
   const pinyin = React.useRef(null);
@@ -17,42 +16,33 @@ const Write = (props) => {
   const ExEn = React.useRef(null);
   const ExKo = React.useRef(null);
 
-  const addMemoList = () => {
-    // dispatch(
-    //   createMemo({
-    //     word: word.current.value,
-    //     pinyin: pinyin.current.value,
-    //     def: def.current.value,
-    //     ExEn: ExEn.current.value,
-    //     ExKo: ExKo.current.value,
-    //     completed: 0,
-    //   })
-    // );
-    dispatch(
-      createMemoFB({
-        word: word.current.value,
-        pinyin: pinyin.current.value,
-        def: def.current.value,
-        ExEn: ExEn.current.value,
-        ExKo: ExKo.current.value,
-        completed: 0,
-      })
-    );
-  };
+  // const addMemoList = () => {
+  //   dispatch(
+  //     createMemo({
+  //       word: word.current.value,
+  //       pinyin: pinyin.current.value,
+  //       def: def.current.value,
+  //       ExEn: ExEn.current.value,
+  //       ExKo: ExKo.current.value,
+  //       completed: false,
+  //     })
+  //   );
+  // };
 
   return (
     <>
       <Wrap>
-        <Title>단어 추가하기</Title>
+        <Title>단어 수정하기</Title>
         <Form>
           <P>단어</P>
           <Input
             type="text"
             ref={word}
             title="단어"
+            value={my_lists.word}
             idText="input-word"
             required
-          />
+          ></Input>
           <P>병음</P>
           <Input
             type="text"
@@ -89,24 +79,22 @@ const Write = (props) => {
 
           <Btn
             type="submit"
-            onClick={async () => {
-              if (word.current.value === "") {
+            onClick={() => {
+              if (
+                word.current.value ||
+                pinyin.current.value ||
+                def.current.value ||
+                ExEn.current.value ||
+                ExKo.current.value === ""
+              ) {
                 alert("항목을 전부 채워주세요!");
                 return;
               }
-              addMemoList();
-              // const docRef = await addDoc(collection(db, "memo"), {
-              //   word: word.current.value,
-              //   pinyin: pinyin.current.value,
-              //   def: def.current.value,
-              //   ExEn: ExEn.current.value,
-              //   ExKo: ExKo.current.value,
-              //   completed: 0,
-              // });
               history.push("/");
+              // addMemoList();
             }}
           >
-            저장하기
+            수정하기
           </Btn>
         </Form>
       </Wrap>
@@ -168,4 +156,4 @@ const Btn = styled.button`
   }
 `;
 
-export default Write;
+export default Modifi;
