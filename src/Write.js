@@ -90,13 +90,7 @@ const Write = (props) => {
           <Btn
             type="submit"
             onClick={async () => {
-              if (
-                word.current.value ||
-                pinyin.current.value ||
-                def.current.value ||
-                ExEn.current.value ||
-                ExKo.current.value === ""
-              ) {
+              if (word.current.value === "") {
                 alert("항목을 전부 채워주세요!");
                 return;
               }
