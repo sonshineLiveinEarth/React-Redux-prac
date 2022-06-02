@@ -22,7 +22,8 @@ export default function reducer(state = initalState, action = {}) {
     case "memo/LOAD": {
       console.log("이제 값을 불러올거야");
       console.log(action.memo.sort());
-      return { list: action.memo.sort(), is_loaded: true };
+
+      return { list: action.memo, is_loaded: true };
     }
 
     case "memo/CREATE": {
@@ -50,7 +51,7 @@ export default function reducer(state = initalState, action = {}) {
 
       const new_memo_list = state.list.map((l, idx) => {
         if (parseInt(action.memo_index) === idx) {
-          return { ...l, completed: l.completed + 1 };
+          return { ...l };
         } else {
           return l;
         }
@@ -166,6 +167,28 @@ export const updateMemoFB = (memo_id, memo_completed) => {
     });
 
     dispatch(updateMemo(memo_index));
+  };
+};
+
+export const modifiMemoFB = (modifi, memo_id) => {
+  return async function (dispatch, getState) {
+    const docRef = doc(db, "memo", memo_id);
+    await updateDoc(docRef, {
+      word: modifi.word,
+      pinyin: modifi.pinyin,
+      def: modifi.def,
+      ExEn: modifi.ExEn,
+      ExKo: modifi.ExKo,
+      completed: modifi.completed,
+    });
+
+    console.log(getState().memo);
+    const _memo_list = getState().memo.list;
+    _memo_list.findIndex((m) => {
+      return m.id === memo_id;
+    });
+
+    dispatch(updateMemo(memo_id));
   };
 };
 

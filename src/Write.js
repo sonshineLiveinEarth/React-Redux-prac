@@ -90,7 +90,13 @@ const Write = (props) => {
           <Btn
             type="submit"
             onClick={async () => {
-              if (word.current.value === "") {
+              if (
+                word.current.value ||
+                pinyin.current.value ||
+                def.current.value ||
+                ExEn.current.value ||
+                ExKo.current.value === ""
+              ) {
                 alert("항목을 전부 채워주세요!");
                 return;
               }
@@ -137,7 +143,7 @@ const Form = styled.form`
 const P = styled.span`
   font-size: 16px;
   font-weight: bold;
-  margin-top: 20px;
+  margin: 20px 0px 4px 0px;
 `;
 
 const Input = styled.input`

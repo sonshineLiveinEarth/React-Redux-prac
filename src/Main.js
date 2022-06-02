@@ -9,7 +9,6 @@ const Main = () => {
   const history = useHistory();
   return (
     <>
-      <Div />
       <Wrap>
         <Card />
       </Wrap>
@@ -26,17 +25,25 @@ const Main = () => {
 };
 
 const Wrap = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: stretch;
-  flex-wrap: wrap-reverse;
-  overflow: visible;
-`;
+  width: 90%;
+  max-width: 1400px;
+  margin: 80px auto auto auto;
 
-const Div = styled.div`
-  width: 100%;
-  height: 100px;
+  display: grid;
+  grid-auto-rows: 170px;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 50px 0px;
+  justify-content: center;
+  flex-flow: wrap;
+  grid-gap: 20px;
+
+  @media only screen and (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media only screen and (max-width: 800px) {
+    grid-template-columns: 1fr;
+  } ;
 `;
 
 const PlusBtn = styled.div`

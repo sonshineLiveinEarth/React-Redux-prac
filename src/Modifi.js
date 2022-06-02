@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loadMemoFB, updateMemoFB } from "./redux/modules/memo";
+import { modifiMemoFB } from "./redux/modules/memo";
 
 const Modifi = (props) => {
   const history = useHistory();
   const dispatch = useDispatch();
-  // const words = useParams();
+  const words = useParams();
+
   const my_lists = useSelector((state) => state.memo.list);
 
   const word = React.useRef(null);
@@ -16,18 +17,20 @@ const Modifi = (props) => {
   const ExEn = React.useRef(null);
   const ExKo = React.useRef(null);
 
-  // const addMemoList = () => {
-  //   dispatch(
-  //     createMemo({
-  //       word: word.current.value,
-  //       pinyin: pinyin.current.value,
-  //       def: def.current.value,
-  //       ExEn: ExEn.current.value,
-  //       ExKo: ExKo.current.value,
-  //       completed: false,
-  //     })
-  //   );
-  // };
+  const list = my_lists[words.words];
+  const memo_id = list.id;
+
+  const modifiMemo = (memo_id) => {
+    const modifi = {
+      word: word.current.value,
+      pinyin: pinyin.current.value,
+      def: def.current.value,
+      ExEn: ExEn.current.value,
+      ExKo: ExKo.current.value,
+      completed: 0,
+    };
+    dispatch(modifiMemoFB(modifi, memo_id));
+  };
 
   return (
     <>
@@ -39,7 +42,7 @@ const Modifi = (props) => {
             type="text"
             ref={word}
             title="단어"
-            value={my_lists.word}
+            defaultValue={list.word}
             idText="input-word"
             required
           ></Input>
@@ -48,6 +51,7 @@ const Modifi = (props) => {
             type="text"
             ref={pinyin}
             title="병음"
+            defaultValue={list.pinyin}
             idText="input-pinyin"
             required
           />
@@ -56,14 +60,17 @@ const Modifi = (props) => {
             type="text"
             ref={def}
             title="의미"
+            defaultValue={list.def}
             idText="input-def"
             required
+            // defaultValue={}
           />
           <P>예문</P>
           <Input
             type="text"
             ref={ExEn}
             title="예문"
+            defaultValue={list.ExEn}
             idText="input-ex-en"
             required
           />
@@ -72,6 +79,7 @@ const Modifi = (props) => {
             type="text"
             ref={ExKo}
             title="해석"
+            defaultValue={list.ExKo}
             idText="input-ex-ko"
             required
           />
@@ -80,21 +88,22 @@ const Modifi = (props) => {
           <Btn
             type="submit"
             onClick={() => {
-              if (
-                word.current.value ||
-                pinyin.current.value ||
-                def.current.value ||
-                ExEn.current.value ||
-                ExKo.current.value === ""
-              ) {
-                alert("항목을 전부 채워주세요!");
-                return;
-              }
+              // if (
+              //   word.current.value ||
+              //   pinyin.current.value ||
+              //   def.current.value ||
+              //   ExEn.current.value ||
+              //   ExKo.current.value === ""
+              // ) {
+              //   alert("항목을 전부 채워주세요!");
+              //   return;
+              // }
+              modifiMemo(memo_id);
               history.push("/");
               // addMemoList();
             }}
           >
-            수정하기
+            수정완료
           </Btn>
         </Form>
       </Wrap>
@@ -125,7 +134,7 @@ const Form = styled.form`
 const P = styled.span`
   font-size: 16px;
   font-weight: bold;
-  margin-top: 20px;
+  margin: 20px 0px 4px 0px;
 `;
 
 const Input = styled.input`

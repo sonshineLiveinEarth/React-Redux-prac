@@ -91,5 +91,10 @@ const DotBackground = styled.div`
   overflow-x: hidden;
   width: 100vw;
   height: 100vh;
+
+  // display: grid;
+  // grid-template-columns: 40px 1fr 40px;
+  // grid-template-rows: 100px minmax(140px, auto);
+  // gap: 20px;
 `;
 export default App;

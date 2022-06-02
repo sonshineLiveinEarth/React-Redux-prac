@@ -18,7 +18,6 @@ const Card = (props) => {
   return (
     <>
       {my_lists.map((list, index) => {
-        console.log(list.id);
         return (
           <CardBox
             key={index}
@@ -47,7 +46,7 @@ const Card = (props) => {
               </Btn>
               <Btn
                 onClick={() => {
-                  history.push(`/write/modifi/${list.word}`);
+                  history.push(`/write/modifi/${(list.word, index)}`);
                 }}
               >
                 수정
@@ -71,11 +70,6 @@ const Card = (props) => {
 const CardBox = styled.div`
   border: 1px solid black;
   border-radius: 8px;
-  min-width: 300px;
-  max-width: 400px;
-  width: 90%;
-  height: 140px;
-  margin: 20px;
 
   display: flex;
   flex-direction: row;
@@ -84,9 +78,11 @@ const CardBox = styled.div`
   background-color: ${(props) => (props.completed ? "transparent" : "#ddd")};
   }};
 
+
   &:hover {
     box-shadow: 5px 5px 20px #e6e6e6;
   }
+
 `;
 
 const Ul = styled.ul`
@@ -102,6 +98,10 @@ const Li1 = styled.li`
   font-size: 30px;
   margin: 2px;
   font-weight: bold;
+
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+  // white-space: nowrap;
 `;
 
 const Li3 = styled.li`
