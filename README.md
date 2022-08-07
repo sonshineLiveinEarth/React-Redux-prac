@@ -30,10 +30,10 @@
 
 ## ✍️ Review
 
-[회고 글] (https://velog.io/@yunju/%EC%98%81%EB%8B%A8%EC%96%B4%EC%9E%A5-%EB%A7%8C%EB%93%A4%EA%B8%B0)
+[회고 글](https://velog.io/@yunju/%EC%98%81%EB%8B%A8%EC%96%B4%EC%9E%A5-%EB%A7%8C%EB%93%A4%EA%B8%B0)
     
-## Reference
+## 📖 Reference
 
-[리덕스란?] (https://www.notion.so/Redux-Basic-cbe7b16ea3784a048d5730837520232d) <br/>
-[리덕스 미들웨어] (https://www.notion.so/1af87aff6c16456dabf30510966ff7f4)
+[리덕스란?](https://www.notion.so/Redux-Basic-cbe7b16ea3784a048d5730837520232d) <br/>
+[리덕스 미들웨어](https://www.notion.so/1af87aff6c16456dabf30510966ff7f4)
 
