@@ -17,7 +17,7 @@
 <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=redux&logoColor=white"> 
 </div>
 
-## 기능 구현
+## 🧑‍💻 Deployment
 1. 게시글 목록 페이지
     - 게시글 목록을 화면에 그리기 (각각 뷰는 카드 뷰로 만들기)
     - 게시글 내의 예시는 파란 글씨로 보여주기
